@@ -1,0 +1,143 @@
+{
+  "phase": 2,
+  "split_counts": {
+    "shift_eu_test": 3795,
+    "train": 2485,
+    "test": 563,
+    "val": 523
+  },
+  "preprocessing_and_imputation": {
+    "train_median_positional_accuracy_m": 12.0,
+    "train_median_observed_hour": 18.99,
+    "pos_accuracy_missing_rate_pct": 19.9,
+    "hour_missing_rate_pct": 1.7,
+    "engineered_features_count": 15
+  },
+  "vision_embedding_metadata": {
+    "primary_backbone": {
+      "backbone_name": "vit_small_patch16_224.dino",
+      "device_used": "cpu",
+      "raw_embedding_dim": 384,
+      "l2_normalized": true,
+      "transform_repr": "Compose(\n    Resize(size=248, interpolation=bicubic, max_size=None, antialias=True)\n    CenterCrop(size=(224, 224))\n    MaybeToTensor()\n    Normalize(mean=tensor([0.4850, 0.4560, 0.4060]), std=tensor([0.2290, 0.2240, 0.2250]))\n)",
+      "inference_authenticity": "100% Real PyTorch Forward Pass on Local JPG Files (Zero Label Usage)"
+    },
+    "secondary_backbone": {
+      "backbone_name": "convnext_tiny.fb_in22k",
+      "device_used": "cpu",
+      "raw_embedding_dim": 768,
+      "l2_normalized": true,
+      "transform_repr": "Compose(\n    Resize(size=256, interpolation=bicubic, max_size=None, antialias=True)\n    CenterCrop(size=(224, 224))\n    MaybeToTensor()\n    Normalize(mean=tensor([0.4850, 0.4560, 0.4060]), std=tensor([0.2290, 0.2240, 0.2250]))\n)",
+      "inference_authenticity": "100% Real PyTorch Forward Pass on Local JPG Files (Zero Label Usage)"
+    },
+    "normalization_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "normalization_std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "unsupervised_discovery": {
+    "pca_components_count": 32,
+    "pca_variance_explained_top5_pct": 27.08,
+    "pca_variance_explained_total_pct": 62.74,
+    "manifold_projection_method": "UMAP",
+    "k_sweep_evaluation": [
+      {
+        "k": 4,
+        "silhouette_score": 0.1129,
+        "davies_bouldin_index": 2.5211,
+        "calinski_harabasz_score": 219.89
+      },
+      {
+        "k": 6,
+        "silhouette_score": 0.1037,
+        "davies_bouldin_index": 2.486,
+        "calinski_harabasz_score": 183.65
+      },
+      {
+        "k": 8,
+        "silhouette_score": 0.1209,
+        "davies_bouldin_index": 2.1506,
+        "calinski_harabasz_score": 171.13
+      },
+      {
+        "k": 10,
+        "silhouette_score": 0.1182,
+        "davies_bouldin_index": 2.2138,
+        "calinski_harabasz_score": 157.25
+      },
+      {
+        "k": 12,
+        "silhouette_score": 0.1103,
+        "davies_bouldin_index": 2.2187,
+        "calinski_harabasz_score": 144.85
+      },
+      {
+        "k": 14,
+        "silhouette_score": 0.1172,
+        "davies_bouldin_index": 2.1254,
+        "calinski_harabasz_score": 136.61
+      },
+      {
+        "k": 16,
+        "silhouette_score": 0.1159,
+        "davies_bouldin_index": 2.1603,
+        "calinski_harabasz_score": 128.45
+      }
+    ],
+    "selected_optimal_k": 8,
+    "kmeans_best_silhouette": 0.1209,
+    "agglomerative_ward_silhouette": 0.0825,
+    "kmeans_vs_agglomerative_ari": 0.4495,
+    "stability_across_seeds_and_subsamples": {
+      "mean_ari": 0.8121,
+      "std_ari": 0.0557,
+      "mean_nmi": 0.8312
+    },
+    "alignment_with_taxonomy_and_guilds": {
+      "nmi_clusters_vs_lookalike_guild": 0.3104,
+      "nmi_clusters_vs_taxonomic_family": 0.3236
+    },
+    "long_tail_embedding_purity": [
+      {
+        "long_tail_tier": "Head (Frequent)",
+        "mean_knn_species_purity": 52.82,
+        "mean_deadly_neighbor_mixing_pct": 28.15,
+        "sample_count": 903
+      },
+      {
+        "long_tail_tier": "Medium",
+        "mean_knn_species_purity": 51.66,
+        "mean_deadly_neighbor_mixing_pct": 37.78,
+        "sample_count": 836
+      },
+      {
+        "long_tail_tier": "Tail (Rare)",
+        "mean_knn_species_purity": 47.13,
+        "mean_deadly_neighbor_mixing_pct": 33.22,
+        "sample_count": 746
+      }
+    ]
+  },
+  "ood_analysis": {
+    "total_flagged_ood_samples": 221,
+    "flagged_ood_percentage": 3.0,
+    "mean_centroid_cosine_dist_normal": 0.2908,
+    "mean_centroid_cosine_dist_ood": 0.3882,
+    "ood_rate_by_long_tail_tier_pct": {
+      "Head (Frequent)": 3.0,
+      "Medium": 2.92,
+      "Tail (Rare)": 3.07
+    },
+    "qualitative_diagnosis_breakdown": {
+      "Low_Quality_Blur_or_Extreme_Illumination": 172,
+      "Biological_Atypical_Morphology_or_Background_Clutter": 47,
+      "Spatial_Metadata_Outlier_Extreme_GPS_Error": 2
+    }
+  }
+}
